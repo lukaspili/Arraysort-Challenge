@@ -47,13 +47,15 @@ public class ChallengerAdrienBrault implements Challenger {
 
 		for (int i=1; i<array.length; i++) {
 			int iValue = array[i];
-			for (int j=0; j<i; j++) {
-				if (iValue < array[j]) {
-					arrayShift(array, j, i);
-					
+			int j;
+			for (j=i; j>0; j--) {
+				if (array[j-1] > iValue) {
+					array[j] = array[j-1];
+				} else {
 					break;
 				}
 			}
+			array[j] = iValue;
 		}
 		
 		return array;
