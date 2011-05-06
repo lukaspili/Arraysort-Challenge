@@ -5,33 +5,38 @@ public class ChallengerAdrienBrault implements Challenger {
 	public int[] bubbleSort(int[] array) {
 
 		boolean loopHasChangedArray;
-
-		do {
+		
+		for (int i=array.length-1; i>0; i--) {
 			loopHasChangedArray = false;
-
-			for (int i = 0; i < (array.length - 1); i++) {
-				if (array[i] > array[i + 1]) {
-					arraySwapIndexes(array, i, i + 1);
-
+			
+			for (int j=0; j<i; j++) {
+				if (array[j] > array[j+1]) {
+					arraySwapIndexes(array, j, j+1);
 					loopHasChangedArray = true;
 				}
 			}
-		} while (loopHasChangedArray);
+			
+			if (!loopHasChangedArray) {
+				break;
+			}
+		}
 
 		return array;
 	}
 
 	public int[] selectionSort(int[] array) {
 
-		for (int i = 0; i < array.length; i++) {
+		for (int i=0; i<array.length; i++) {
 			int minValueIndex = i;
-
-			for (int j = i; j < array.length; j++) {
-				if (array[j] < array[minValueIndex]) {
+			int minValue = array[i];
+			
+			for (int j=i; j<array.length; j++) {
+				if (array[j] < minValue) {
 					minValueIndex = j;
+					minValue = array[j];
 				}
 			}
-
+			
 			arraySwapIndexes(array, i, minValueIndex);
 		}
 
@@ -40,18 +45,20 @@ public class ChallengerAdrienBrault implements Challenger {
 
 	public int[] insertionSort(int[] array) {
 
-		for (int i = 1; i < array.length; i++) {
-			for (int j = 0; j < i; j++) {
+		for (int i=1; i<array.length; i++) {
+			for (int j=0; j<i; j++) {
 				if (array[i] < array[j]) {
-					for (int k = i; k > j; k--) {
-						arraySwapIndexes(array, k, k - 1);
+					int buffer = array[i];
+					for (int k=i; k>j; k--) {
+						array[k] = array[k-1];
 					}
-
+					array[j] = buffer;
+					
 					break;
 				}
 			}
 		}
-
+		
 		return array;
 	}
 
