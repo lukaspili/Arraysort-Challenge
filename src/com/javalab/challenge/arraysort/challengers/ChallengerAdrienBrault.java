@@ -46,13 +46,10 @@ public class ChallengerAdrienBrault implements Challenger {
 	public int[] insertionSort(int[] array) {
 
 		for (int i=1; i<array.length; i++) {
+			int iValue = array[i];
 			for (int j=0; j<i; j++) {
-				if (array[i] < array[j]) {
-					int buffer = array[i];
-					for (int k=i; k>j; k--) {
-						array[k] = array[k-1];
-					}
-					array[j] = buffer;
+				if (iValue < array[j]) {
+					arrayShift(array, j, i);
 					
 					break;
 				}
@@ -66,6 +63,14 @@ public class ChallengerAdrienBrault implements Challenger {
 		int buffer = array[index1];
 		array[index1] = array[index2];
 		array[index2] = buffer;
+	}
+	
+	static void arrayShift(int[]array, int index1, int index2) {
+		int buffer = array[index2];
+		for (int k=index2; k>index1; k--) {
+			array[k] = array[k-1];
+		}
+		array[index1] = buffer;
 	}
 	
 	@Override
